@@ -6,7 +6,7 @@
   </defs>
 
   <rect width="1200" height="760" fill="#F8FAFC"/>
-  <text x="56" y="52" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="28" font-weight="700" fill="#0F172A">四层决策树</text>
+  <text x="56" y="52" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="28" font-weight="700" fill="#0F172A">四层排查顺序</text>
   <text x="56" y="82" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#64748B">从「找不到」到「哪一层坏了」：每一层只问一个二值问题</text>
 
   <!-- top node -->

@@ -1,25 +1,19 @@
 <div align="center">
-  <a href="docs/assets/banner.svg"><img src="docs/assets/banner.svg" alt="黑群晖 RR 引导排障工具箱" width="100%"></a>
+  <a href="docs/assets/banner.svg"><img src="docs/assets/banner.svg" alt="黑群晖 RR 引导排障笔记" width="100%"></a>
 </div>
 
 <p align="center">
-  <img alt="RR 26.3.0" src="https://img.shields.io/badge/RR-26.3.0-22D3EE?style=flat-square">
-  <img alt="DSM 7.3" src="https://img.shields.io/badge/DSM-7.3-34D399?style=flat-square">
-  <img alt="J1900" src="https://img.shields.io/badge/Board-J1900-FBBF24?style=flat-square">
-  <img alt="Headless" src="https://img.shields.io/badge/Rescue-Headless-8B5CF6?style=flat-square">
-  <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-3B82F6?style=flat-square">
+  <b>Synology Assistant 找不到 NAS：一次个人排障记录</b><br>
+  一台星际蜗牛 J1900、一块 RR 引导 U 盘、一个把 LAN4 当 iTV 口的光猫。
 </p>
 
-<p align="center">
-  <b>Synology Assistant 找不到 NAS？</b><br>
-  先用「零包」证据链判断问题在哪一层，再用无显示器流程把它救回来。
-</p>
+> 这不是通用教程。不同 RR 版本、主板、光猫的差异可能很大，下面只是我这次遇到的情况和验证过的做法。
 
 > **30 秒版**：不是 Assistant 的问题，也不是网线。NAS 因为 **BIOS 复位 + LAN4 iTV VLAN + 误选 direct boot** 三条叠加，从头到尾一个包都没发。修法：BIOS 设 U 盘启动 → 换 LAN1/2/3 → `directboot=false` + `bootwait=300` → PC 直连 + 最小 DHCP + RR SSH。
 
 ---
 
-## 问题现场
+## 我遇到的现象
 
 一台**星际蜗牛 J1900D** 黑群晖，DSM 装在 500G 机械盘上，16G mSATA 已拔除，靠一块 RR 引导 U 盘启动。
 
@@ -34,7 +28,7 @@
 
 ---
 
-## 根因：三条叠加
+## 最后发现是三个问题叠在一起
 
 <a href="docs/assets/root-cause.svg"><img src="docs/assets/root-cause.svg" alt="三条叠加的根因与修复路径" width="100%"></a>
 
@@ -50,7 +44,7 @@
 
 ---
 
-## 解决：四步
+## 我最后怎么修的
 
 ### ① BIOS：让机器重新从 U 盘启动
 
@@ -65,7 +59,7 @@
 
 ### ③ 配置：`directboot` 和 `bootwait` 一起改
 
-这是整晚最关键的发现。网上多数教程只说「把 `directboot` 改成 `false`」，但读 RR 的 `boot.sh` 会发现：
+这是这次最反直觉的一点。网上多数说法是「把 `directboot` 改成 `false`」，但读 RR 的 `boot.sh` 会发现：
 
 - `directboot=false` 只是**不立即**引导 DSM；
 - 它仍会进入 `_bootwait` 倒计时，默认只有 **10 秒**；
@@ -97,40 +91,30 @@ PC 先切 Wi-Fi 保住网络
   → 建立会话本身就会打断 _bootwait 倒计时
 ```
 
-这条路径完全不依赖屏幕和键盘，是这次能救回来的核心方法。
+这条路径完全不依赖屏幕和键盘，是这次能救回来的关键。
 
 > **结果**：NAS 重新上线，`22 / 5000 / 5001` 全部 OPEN，DSM 登录页 HTTP 200。真正修好的不是网络，而是引导路径。
 
 ---
 
-## 为什么这份文档值得看
+## 后来整理的排查顺序
 
-| # | 内容 | 为什么少见 |
-|---|---|---|
-| 1 | **RR 引导 `directboot` / `bootwait` 的真实语义** | 网上多数教程只说「把 directboot 改成 false」。实际只改这一项，10 秒后它**仍然会 kexec 进 DSM**。必须同时拉长 `bootwait`，并在窗口内建立 SSH / Web 会话。 |
-| 2 | **无显示器恢复流程** | 不接屏幕、不进 GRUB 菜单，靠 PC 直连 + 最小 DHCP + RR 环境 SSH（`root/rr`）完成诊断和恢复。全程有可观察的数字证据。 |
-| 3 | **「零包」证据链** | 把「Assistant 找不到」拆成供电 / 引导介质 / 引导项 / 网络路径四层，每一层给出可观测现象和排除方法。避免在错误的方向上换网线、重刷 U 盘。 |
-
----
-
-## 四层决策树
-
-<a href="docs/assets/decision-tree.svg"><img src="docs/assets/decision-tree.svg" alt="四层决策树" width="100%"></a>
+<a href="docs/assets/decision-tree.svg"><img src="docs/assets/decision-tree.svg" alt="四层排查顺序" width="100%"></a>
 
 <p align="center"><sub>点击图片查看大图</sub></p>
 
 ---
 
-## 仓库结构
+## 这个仓库里有什么
 
 ```
 黑群晖Synology/
 ├── README.md                      # 你正在看的这一页
 ├── docs/
-│   ├── 01-RR引导排障手册.md        # 四层决策树、启动流程、directboot/bootwait、无头恢复
-│   ├── 02-无显示器恢复实录.md      # 完整时间线、证据链、假阳性复盘
+│   ├── 01-RR引导排障笔记.md        # 排查顺序、启动流程、directboot/bootwait、无头恢复
+│   ├── 02-无显示器恢复实录.md      # 当晚的时间线、证据链、假阳性复盘
 │   ├── 03-DSM运维笔记.md           # SSH / SFTP / sudo / 时间 / 端口 / 安全自查
-│   └── assets/                    # banner / 根因图 / 决策树
+│   └── assets/                    # banner / 根因图 / 排查顺序图
 └── tools/
     ├── dhcp_probe.py              # 被动监听 DHCP，识别是谁在要地址
     ├── dhcp_server.py             # 最小 DHCP 服务，直连救援用
@@ -139,7 +123,9 @@ PC 先切 Wi-Fi 保住网络
     └── patch_rr_config.py         # 安全修改 user-config.yml（备份 + diff 校验）
 ```
 
-## 工具
+## 顺手写的几个脚本
+
+这些是当晚为了排查临时写的，后来稍微整理了一下。**只在这次的环境里验证过**，不同 RR 版本 / Windows 版本可能需要调整。
 
 | 脚本 | 用途 | 依赖 |
 |---|---|---|
@@ -151,7 +137,7 @@ PC 先切 Wi-Fi 保住网络
 
 ---
 
-## 快速开始：无显示器救回一台 RR 黑群晖
+## 如果再来一次，我会这么做
 
 前提：电脑有**有线网口 + Wi-Fi**（Wi-Fi 用来保住远程/网络，网口腾给 NAS），NAS 与电脑网线直连。
 
@@ -171,11 +157,11 @@ python tools/dhcp_server.py --server-ip 169.254.10.1 --offer-ip 169.254.10.3
 python tools/wait_rr_ssh.py --host 169.254.10.3 --password rr
 ```
 
-详细原理和每一步的判断依据见 [排障手册](docs/01-RR引导排障手册.md)。
+详细过程和每一步的判断依据见 [排障笔记](docs/01-RR引导排障笔记.md)。
 
 ---
 
-## 当晚的证据链
+## 当时的证据
 
 以下四组独立观测同时为负，才敢下「NAS 没发包」的结论：
 
@@ -188,10 +174,10 @@ python tools/wait_rr_ssh.py --host 169.254.10.3 --password rr
 
 ---
 
-## 适用范围
+## 这只适用于
 
 - 黑群晖 / XPEnology，引导器为 **RR（RROrg/rr）** 或行为接近的 ARPL
-- 老平台主板（本案例：Intel Celeron J1900，Aptio CRB BIOS，2018）
+- 老平台主板（我这次是 Intel Celeron J1900，Aptio CRB BIOS，2018）
 - 无 IPMI、无串口、无显示器，只有一台 Windows 笔记本
 - DSM 7.x
 

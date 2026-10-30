@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="黑群晖 RR 引导排障工具箱">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="黑群晖 RR 引导排障笔记">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0B1220"/>
@@ -31,9 +31,9 @@
   <circle cx="80" cy="60" r="4" fill="#22D3EE"/>
   <text x="94" y="65" font-family="'JetBrains Mono','Cascadia Code',Consolas,monospace" font-size="12" fill="#67E8F9" letter-spacing="1.2">XPENOLOGY · RR LOADER</text>
 
-  <text x="64" y="140" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="44" font-weight="700" fill="#F8FAFC">黑群晖 RR 引导排障工具箱</text>
-  <text x="64" y="180" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" fill="#94A3B8">Synology Assistant 找不到 NAS？</text>
-  <text x="64" y="208" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" fill="#94A3B8">从「零包」证据链到无显示器恢复</text>
+  <text x="64" y="140" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="44" font-weight="700" fill="#F8FAFC">黑群晖 RR 引导排障笔记</text>
+  <text x="64" y="180" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" fill="#94A3B8">Synology Assistant 找不到 NAS</text>
+  <text x="64" y="208" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" fill="#94A3B8">一次个人排障记录：从零包到无显示器恢复</text>
 
   <rect x="64" y="228" width="132" height="4" rx="2" fill="url(#accent)" filter="url(#softGlow)"/>
 

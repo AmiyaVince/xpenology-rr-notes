@@ -15,6 +15,8 @@
   先用「零包」证据链判断问题在哪一层，再用无显示器流程把它救回来。
 </p>
 
+> **30 秒版**：不是 Assistant 的问题，也不是网线。NAS 因为 **BIOS 复位 + LAN4 iTV VLAN + 误选 direct boot** 三条叠加，从头到尾一个包都没发。修法：BIOS 设 U 盘启动 → 换 LAN1/2/3 → `directboot=false` + `bootwait=300` → PC 直连 + 最小 DHCP + RR SSH。
+
 ---
 
 ## 问题现场

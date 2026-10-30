@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/assets/banner.svg" alt="黑群晖 RR 引导排障工具箱" width="100%">
+  <a href="docs/assets/banner.svg"><img src="docs/assets/banner.svg" alt="黑群晖 RR 引导排障工具箱" width="100%"></a>
 </div>
 
 <p align="center">
@@ -36,7 +36,9 @@
 
 ## 根因：三条叠加
 
-<img src="docs/assets/root-cause.svg" alt="三条叠加的根因与修复路径" width="100%">
+<a href="docs/assets/root-cause.svg"><img src="docs/assets/root-cause.svg" alt="三条叠加的根因与修复路径" width="100%"></a>
+
+<p align="center"><sub>点击图片查看大图</sub></p>
 
 | # | 根因 | 表现 |
 |---|---|---|
@@ -111,7 +113,9 @@ PC 先切 Wi-Fi 保住网络
 
 ## 四层决策树
 
-<img src="docs/assets/decision-tree.svg" alt="四层决策树" width="100%">
+<a href="docs/assets/decision-tree.svg"><img src="docs/assets/decision-tree.svg" alt="四层决策树" width="100%"></a>
+
+<p align="center"><sub>点击图片查看大图</sub></p>
 
 ---
 

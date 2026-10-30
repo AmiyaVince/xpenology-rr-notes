@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-label="四层决策树">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="760" fill="#F8FAFC"/>
+  <text x="56" y="52" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="28" font-weight="700" fill="#0F172A">四层决策树</text>
+  <text x="56" y="82" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#64748B">从「找不到」到「哪一层坏了」：每一层只问一个二值问题</text>
+
+  <!-- top node -->
+  <rect x="420" y="100" width="360" height="56" rx="28" fill="#0F172A"/>
+  <text x="600" y="134" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="700" fill="#F8FAFC">Synology Assistant 找不到 NAS</text>
+  <path d="M600 156 V190" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- question -->
+  <rect x="370" y="190" width="460" height="64" rx="14" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="600" y="218" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15.5" font-weight="700" fill="#0F172A">NAS 有没有发出任何二层报文？</text>
+  <text x="600" y="240" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#64748B">DHCP · ARP · mDNS / Bonjour</text>
+
+  <!-- branches -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M450 254 V282 H300 V310" marker-end="url(#arrow2)"/>
+    <path d="M750 254 V282 H900 V310" marker-end="url(#arrow2)"/>
+  </g>
+  <text x="360" y="276" text-anchor="end" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="700" fill="#DC2626">没有 → 查 NAS 自身</text>
+  <text x="840" y="276" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="700" fill="#059669">有 → 查网络路径</text>
+
+  <!-- L0 -->
+  <rect x="100" y="310" width="400" height="100" rx="14" fill="#FEF2F2" stroke="#FECACA"/>
+  <text x="124" y="340" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#DC2626">L0 · 供电 / POST</text>
+  <text x="124" y="366" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#7F1D1D">风扇 · 蜂鸣器 · 硬盘 · 前面板灯</text>
+  <text x="124" y="388" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#7F1D1D">USB 键盘 Caps Lock 能切换 = 机器活着</text>
+
+  <!-- L1 -->
+  <rect x="100" y="430" width="400" height="110" rx="14" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="124" y="460" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#D97706">L1 · 引导介质</text>
+  <text x="124" y="486" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#78350F">DD / raw 写入 · 后置 USB 2.0 · BIOS 启动项</text>
+  <text x="124" y="508" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#78350F">rsysenv 法证：这块 U 盘曾经能启动吗？</text>
+
+  <!-- L2 -->
+  <rect x="100" y="560" width="400" height="120" rx="14" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="124" y="590" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#7C3AED">L2 · 引导项</text>
+  <text x="124" y="616" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#4C1D95">Boot DSM（RR 环境） vs direct（直跳 DSM）</text>
+  <text x="124" y="638" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#4C1D95">directboot / bootwait / grub_cksum</text>
+  <text x="124" y="660" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="700" fill="#6D28D9">direct 路径会让 VGA 停在 Booting...，且零包</text>
+
+  <!-- L3 -->
+  <rect x="700" y="310" width="400" height="180" rx="14" fill="#ECFEFF" stroke="#A5F3FC"/>
+  <text x="724" y="340" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#0891B2">L3 · 网络路径</text>
+  <text x="724" y="368" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#164E63">iTV / LAN4 · WAN / 2.5G 自适应口</text>
+  <text x="724" y="392" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#164E63">是否与 DHCP 服务器同二层</text>
+  <text x="724" y="416" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#164E63">VLAN · 端口隔离 · AP 隔离</text>
+  <text x="724" y="440" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#164E63">直连电脑：看收发计数是否 +0</text>
+  <text x="724" y="464" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="700" fill="#0E7490">链路 Up ≠ 有包；灯亮 ≠ 系统起来</text>
+
+  <!-- direct test -->
+  <rect x="700" y="520" width="400" height="120" rx="14" fill="#F0FDF4" stroke="#86EFAC" stroke-dasharray="6 5"/>
+  <text x="724" y="550" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="700" fill="#15803D">直连测试：把 NAS 从网络里摘出来</text>
+  <text x="724" y="578" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#166534">链路 1 Gbps + 20 秒单播/广播/组播 +0</text>
+  <text x="724" y="600" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#166534">= PHY 通了，操作系统没把网卡跑起来</text>
+  <text x="724" y="622" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="700" fill="#047857">→ 问题锁死在 NAS 的引导路径</text>
+
+  <!-- connectors -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M300 410 V430" marker-end="url(#arrow2)"/>
+    <path d="M300 540 V560" marker-end="url(#arrow2)"/>
+    <path d="M900 490 V520" marker-end="url(#arrow2)"/>
+  </g>
+
+  <!-- conclusion -->
+  <rect x="56" y="692" width="1088" height="40" rx="20" fill="#ECFDF5" stroke="#6EE7B7"/>
+  <text x="600" y="718" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#047857">先证明有没有发包，再决定查 NAS 还是查网络</text>
+
+  <text x="600" y="750" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#94A3B8">每一层只问一个二值问题：有没有 POST？有没有读 U 盘？有没有进 GRUB？有没有发包？有没有拿到 IP？</text>
+</svg>

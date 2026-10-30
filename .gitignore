@@ -1,0 +1,12 @@
+# 运行产物
+*.log
+*.bak
+*.bak.*
+
+# Python
+__pycache__/
+*.pyc
+
+# 本地配置（含序列号 / MAC / 密码，绝不提交）
+user-config.yml
+user-config.yml.*

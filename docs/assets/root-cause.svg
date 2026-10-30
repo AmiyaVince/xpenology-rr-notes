@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-label="三条叠加的根因与修复路径">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="640" fill="#F8FAFC"/>
+  <text x="56" y="52" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="28" font-weight="700" fill="#0F172A">三条叠加的根因</text>
+  <text x="56" y="82" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#64748B">任何一条单独存在，表现都像「Synology Assistant 坏了」</text>
+
+  <!-- symptom card -->
+  <rect x="56" y="112" width="250" height="452" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="80" y="150" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="17" font-weight="700" fill="#EF4444">症状</text>
+  <line x1="80" y1="166" x2="282" y2="166" stroke="#FEE2E2" stroke-width="1.5"/>
+
+  <g font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#334155">
+    <circle cx="88" cy="193" r="4" fill="#EF4444"/>
+    <text x="102" y="198">Assistant 找不到</text>
+    <circle cx="88" cy="231" r="4" fill="#EF4444"/>
+    <text x="102" y="236">网口灯常亮</text>
+    <circle cx="88" cy="269" r="4" fill="#EF4444"/>
+    <text x="102" y="274">DHCP / ARP / mDNS 零包</text>
+    <circle cx="88" cy="307" r="4" fill="#EF4444"/>
+    <text x="102" y="312">屏幕停在 Booting...</text>
+    <circle cx="88" cy="345" r="4" fill="#EF4444"/>
+    <text x="102" y="350">5000 / 5001 不可达</text>
+  </g>
+
+  <rect x="80" y="390" width="202" height="130" rx="12" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="96" y="416" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13" font-weight="700" fill="#C2410C">先证明有没有发包</text>
+  <text x="96" y="442" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#9A3412">全段扫描 · DHCP 租约</text>
+  <text x="96" y="462" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#9A3412">另一网段 · Bonjour</text>
+  <text x="96" y="488" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#9A3412">四组同时为负，才排除</text>
+  <text x="96" y="508" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#9A3412">网络配置问题。</text>
+
+  <!-- root cause cards -->
+  <g>
+    <rect x="350" y="112" width="450" height="130" rx="14" fill="#FFFFFF" stroke="#FECACA"/>
+    <rect x="350" y="112" width="6" height="130" rx="3" fill="#EF4444"/>
+    <rect x="374" y="134" width="40" height="26" rx="8" fill="#FEF2F2" stroke="#FECACA"/>
+    <text x="394" y="152" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" font-weight="700" fill="#DC2626">01</text>
+    <text x="426" y="153" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#0F172A">BIOS 被复位</text>
+    <text x="776" y="152" text-anchor="end" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#94A3B8">L1 · 引导介质</text>
+    <text x="374" y="184" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">修电源时拔过 CMOS 电池</text>
+    <text x="374" y="206" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">启动顺序回默认，不再引导 U 盘</text>
+  </g>
+
+  <g>
+    <rect x="350" y="262" width="450" height="130" rx="14" fill="#FFFFFF" stroke="#FDE68A"/>
+    <rect x="350" y="262" width="6" height="130" rx="3" fill="#F59E0B"/>
+    <rect x="374" y="284" width="40" height="26" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+    <text x="394" y="302" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" font-weight="700" fill="#D97706">02</text>
+    <text x="426" y="303" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#0F172A">LAN4 是 iTV 口</text>
+    <text x="776" y="302" text-anchor="end" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#94A3B8">L3 · 网络路径</text>
+    <text x="374" y="334" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">IPTV 独立 VLAN</text>
+    <text x="374" y="356" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">灯亮、链路通，主 LAN 完全不可见</text>
+  </g>
+
+  <g>
+    <rect x="350" y="412" width="450" height="152" rx="14" fill="#FFFFFF" stroke="#DDD6FE"/>
+    <rect x="350" y="412" width="6" height="152" rx="3" fill="#8B5CF6"/>
+    <rect x="374" y="434" width="40" height="26" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+    <text x="394" y="452" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" font-weight="700" fill="#7C3AED">03</text>
+    <text x="426" y="453" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#0F172A">误选 direct boot</text>
+    <text x="776" y="452" text-anchor="end" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#94A3B8">L2 · 引导项</text>
+    <text x="374" y="486" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">跳过 RR 环境，直接 root=/dev/md0</text>
+    <text x="374" y="508" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#475569">DSM 日志走 ttyS0，网卡没起来</text>
+    <text x="374" y="536" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" font-weight="700" fill="#7C3AED">→ 局域网内零包</text>
+  </g>
+
+  <!-- brackets -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M306 338 H326"/>
+    <path d="M326 177 V488"/>
+    <path d="M326 177 H350" marker-end="url(#arrow)"/>
+    <path d="M326 327 H350" marker-end="url(#arrow)"/>
+    <path d="M326 488 H350" marker-end="url(#arrow)"/>
+
+    <path d="M800 177 H820"/>
+    <path d="M800 327 H820"/>
+    <path d="M800 488 H820"/>
+    <path d="M820 177 V488"/>
+    <path d="M820 338 H840" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- fix card -->
+  <rect x="840" y="112" width="304" height="452" rx="16" fill="#FFFFFF" stroke="#A7F3D0"/>
+  <text x="864" y="150" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="17" font-weight="700" fill="#059669">修复</text>
+  <line x1="864" y1="166" x2="1120" y2="166" stroke="#D1FAE5" stroke-width="1.5"/>
+
+  <g font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif">
+    <text x="864" y="198" font-size="14" font-weight="700" fill="#0F172A">① BIOS</text>
+    <text x="864" y="220" font-size="12.5" fill="#64748B">U 盘设为 UEFI 第一启动项</text>
+
+    <text x="864" y="258" font-size="14" font-weight="700" fill="#0F172A">② 网线</text>
+    <text x="864" y="280" font-size="12.5" fill="#64748B">LAN1/2/3，避开 LAN4</text>
+
+    <text x="864" y="318" font-size="14" font-weight="700" fill="#0F172A">③ 配置</text>
+    <text x="864" y="340" font-family="'JetBrains Mono',Consolas,monospace" font-size="12" fill="#0F766E">directboot: "false"</text>
+    <text x="864" y="360" font-family="'JetBrains Mono',Consolas,monospace" font-size="12" fill="#0F766E">bootwait: "300"</text>
+
+    <text x="864" y="398" font-size="14" font-weight="700" fill="#0F172A">④ 无头救援</text>
+    <text x="864" y="420" font-size="12.5" fill="#64748B">PC 直连 + 最小 DHCP + SSH</text>
+  </g>
+
+  <rect x="864" y="472" width="256" height="44" rx="12" fill="#ECFDF5" stroke="#6EE7B7"/>
+  <text x="992" y="500" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="700" fill="#047857">DSM 恢复 · 5000 OPEN</text>
+
+  <!-- bottom result -->
+  <rect x="56" y="584" width="1088" height="36" rx="18" fill="#0F172A"/>
+  <text x="600" y="607" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#E2E8F0">结果：RR 环境拉起网络 → kexec DSM → 22 / 5000 / 5001 全部 OPEN</text>
+</svg>
